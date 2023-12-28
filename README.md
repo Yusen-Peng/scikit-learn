@@ -20,6 +20,8 @@ image representation:
 
 ## lesson 1 -- linear regression and gradient descent
 
+1. correlation matrix
+
 ## lesson 2 -- logistic regression for classification
 
 ## lesson 3 -- decision trees and random forests

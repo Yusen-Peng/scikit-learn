@@ -26,3 +26,8 @@ matplotlib.rcParams['figure.facecolor'] = '#00000000'
 sns.heatmap(medical_df.corr(), cmap='Blues', annot=True)
 plt.title('correlation matrix')
 plt.show()
+
+
+plt.title('Age vs. Charges')
+sns.scatterplot(data=medical_df, x='age', y='charges', alpha=0.7, s=15)
+plt.show()
