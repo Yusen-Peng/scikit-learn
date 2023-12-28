@@ -9,16 +9,20 @@ import seaborn as sns
 download the data.
 
 """
-medical_charges_url = 'https://raw.githubusercontent.com/JovianML/opendatasets/master/data/medical-charges.csv'
-urlretrieve(medical_charges_url, '../data/medical.csv')
+# medical_charges_url = 'https://raw.githubusercontent.com/JovianML/opendatasets/master/data/medical-charges.csv'
+# urlretrieve(medical_charges_url, '../data/medical.csv')
 
 
-medical_df = pd.read_csv('../data/medical.csv')
+medical_df = pd.read_csv('data/medical.csv').iloc[:, [0, 2, 3, 6]]
 
-print(medical_df.describe())
 
 
 sns.set_style('darkgrid')
 matplotlib.rcParams['font.size'] = 14
 matplotlib.rcParams['figure.figsize'] = (10, 6)
 matplotlib.rcParams['figure.facecolor'] = '#00000000'
+
+#correlation matrix
+sns.heatmap(medical_df.corr(), cmap='Blues', annot=True)
+plt.title('correlation matrix')
+plt.show()
