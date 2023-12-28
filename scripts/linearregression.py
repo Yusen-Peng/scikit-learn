@@ -1,6 +1,7 @@
 from urllib.request import urlretrieve
 import pandas as pd
 import plotly.express as px
+import matplotlib
 import matplotlib.pyplot as plt
 import seaborn as sns
 
@@ -16,3 +17,8 @@ medical_df = pd.read_csv('../data/medical.csv')
 
 print(medical_df.describe())
 
+
+sns.set_style('darkgrid')
+matplotlib.rcParams['font.size'] = 14
+matplotlib.rcParams['figure.figsize'] = (10, 6)
+matplotlib.rcParams['figure.facecolor'] = '#00000000'
