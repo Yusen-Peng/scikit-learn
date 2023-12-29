@@ -20,7 +20,12 @@ image representation:
 
 ## lesson 1 -- linear regression and gradient descent
 
-1. correlation matrix
+machine learning core components
+
+1. Model (regression, decision tree, etc.)
+2. Cost function (how bad the model performs)
+3. Optimizer (modify parameters to better fit the data)
+
 
 ## lesson 2 -- logistic regression for classification
 
