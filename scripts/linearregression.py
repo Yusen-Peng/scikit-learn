@@ -36,9 +36,15 @@ plt.title('Age vs. Charges')
 sns.scatterplot(data=medical_df, x='age', y='charges', alpha=0.7, s=15)
 plt.show()
 
+
+#Loss/Cost function
+#root mean sqaured error
+def rmse(targets, predictions):
+    return np.sqrt(np.mean(np.square(targets - predictions)))
+
 #linear regression with scikit-learn
 #inputs: dataframe
-inputs = medical_df[['age']]
+inputs = medical_df[['age', 'bmi']]
 #targets: array 
 targets = medical_df.charges
 
@@ -48,6 +54,51 @@ model.fit(inputs, targets)
 sample_predictions = model.predict(inputs)
 #print(sample_predictions)
 
+#cost function
+cost = rmse(targets, sample_predictions)
+
 #explicit parameters
+# an array of coefficients
 coef = model.coef_
+#intercept
 intercept = model.intercept_
+
+
+#categorical features
+complete_df = pd.read_csv('data/medical.csv')
+
+sns.barplot(data=complete_df, x='smoker', y='charges')
+#plt.show()
+
+
+#approach 1: binary categories
+smoker_code = {'no': 0, 'yes': 1}
+complete_df['smoker_code'] = complete_df.smoker.map(smoker_code)
+
+inputs = complete_df[['age', 'bmi', 'children', 'smoker_code']]
+targets = complete_df.charges
+
+model = LinearRegression()
+model.fit(inputs, targets)
+
+sample_predictions = model.predict(inputs)
+#print(sample_predictions)
+
+#cost function
+cost = rmse(targets, sample_predictions)
+#print(model.coef_, cost)
+
+#approach 2: one-hot encoding
+from sklearn import preprocessing
+
+#create the encoder and fit the value
+enc = preprocessing.OneHotEncoder()
+enc.fit(complete_df[['region']])
+
+#encoded array
+one_hot = enc.transform(complete_df[['region']]).toarray()
+print(one_hot)
+
+#add the encoded array to the dataframe
+complete_df[['northeast', 'northwest', 'southeast', 'southwest']] = one_hot
+
