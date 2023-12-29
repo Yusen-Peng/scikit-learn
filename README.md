@@ -26,12 +26,12 @@ machine learning core components
 2. Cost function (how bad the model performs)
 3. Optimizer (modify parameters to better fit the data)
 
-## lesson 2 -- logistic regression for classification
+## lesson 2 -- logistic regression for classification (2:22 ~ 4:52)
 
-## lesson 3 -- decision trees and random forests
+## lesson 3 -- decision trees and random forests (4:52 ~ 7:22)
 
-## lesson 4 -- approach ML projects
+## lesson 4 -- approaches to ML projects (7:22 ~ 10:02)
 
-## lesson 5 --
+## lesson 5 -- unsupervised learning (12:22 ~ 13:45)
 
-## lesson 6 -- unsupervised machine learning
+## lesson 6 -- ML projects from scratch (13:45 ~ 16:35)
