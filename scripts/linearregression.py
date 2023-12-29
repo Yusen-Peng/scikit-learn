@@ -84,8 +84,8 @@ model.fit(inputs, targets)
 sample_predictions = model.predict(inputs)
 #print(sample_predictions)
 
-#cost function
-cost = rmse(targets, sample_predictions)
+#cost/loss function
+loss = rmse(targets, sample_predictions)
 #print(model.coef_, cost)
 
 #approach 2: one-hot encoding
@@ -97,8 +97,21 @@ enc.fit(complete_df[['region']])
 
 #encoded array
 one_hot = enc.transform(complete_df[['region']]).toarray()
-print(one_hot)
+#print(one_hot)
 
 #add the encoded array to the dataframe
 complete_df[['northeast', 'northwest', 'southeast', 'southwest']] = one_hot
 
+#feature scaling
+from sklearn.preprocessing import StandardScaler
+#create the scaler and fit the value
+scaler = StandardScaler()
+scaler.fit(medical_df[['age', 'bmi', 'children']])
+
+#scale the inputs
+scaled_inputs = scaler.transform(medical_df[['age', 'bmi', 'children']]) 
+
+
+#create a test set by splitting the dataset
+from sklearn.model_selection import train_test_split
+inputs_train, inputs_test, targets_train, targets_test = train_test_split(medical_df)
