@@ -43,7 +43,7 @@ if use_sample:
 year = pd.to_datetime(raw_df.Date).dt.year
 train_df = raw_df[year < 2015]
 validation_df = raw_df[year < 2015]
-test_df = raw_df[year > 2015]
+test_df = raw_df[year > 2015].dropna()
 
 
 #identify input and target columns
@@ -74,8 +74,52 @@ from sklearn.impute import SimpleImputer
 imputer = SimpleImputer(strategy='mean') # fill missing values with the mean of the column
 #fit the imputer
 imputer.fit(raw_df[numeric_cols])
-#statistics
+#compute the statistics
 print(imputer.statistics_)
-#fill NaN with average value
+#fill NaNs with average value
 train_inputs[numeric_cols] = imputer.transform(train_inputs[numeric_cols]) 
+#print(train_inputs[numeric_cols])
 
+print(train_inputs)
+
+
+#actual logistic model
+from sklearn.linear_model import LogisticRegression
+model = LogisticRegression(solver='liblinear') #liblinear optimizer
+#print(train_inputs[numeric_cols])
+
+#fit the model
+model.fit(train_inputs[numeric_cols], train_targets)
+
+#coefficients (weights)
+print(model.coef_.tolist())
+weight_df = pd.DataFrame({
+    'feature': numeric_cols,
+    'weight': model.coef_.tolist()[0]
+})
+
+#bar-plot visualization
+plt.figure(figsize=(10, 50))
+sns.barplot(data=weight_df.sort_values('weight', ascending=False), x='weight', y='feature')
+plt.show()
+
+#make prediction and evaluate its accuracy
+test_pred = model.predict(test_inputs[numeric_cols])
+#print(pred)
+from sklearn.metrics import accuracy_score
+score = accuracy_score(test_targets, test_pred)
+#print(score)
+
+#probability prediction with a specific model class
+print(model.classes_)
+pred_prob = model.predict_proba(test_inputs[numeric_cols])
+print(pred_prob)
+
+
+#confusion matrix
+from sklearn.metrics import confusion_matrix
+
+confusion_mat = confusion_matrix(test_targets, test_pred, normalize='true')
+
+sns.heatmap(confusion_mat, annot=True) # visualize it with a heatmap
+plt.show()
