@@ -18,15 +18,18 @@ high-level steps of supervised learning:
 image representation:
 ![Alt text](image.png)
 
-## lesson 1 -- linear regression and gradient descent
-
 machine learning core components
 
 1. Model (regression, decision tree, etc.)
 2. Cost function (how bad the model performs)
 3. Optimizer (modify parameters to better fit the data)
 
-work for regression
+Data preprocessing
+
+1. drop NA rows (subset)
+2. scaling (standard, minMax, etc)
+3. imputation (fill missing values)
+4. encoding (categorical columns)
 
 ## lesson 2 -- logistic regression for classification (2:22 ~ 4:52)
 
