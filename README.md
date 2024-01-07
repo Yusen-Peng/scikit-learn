@@ -31,13 +31,7 @@ Data preprocessing
 3. imputation (fill missing values)
 4. encoding (categorical columns)
 
-## lesson 2 -- logistic regression for classification (2:22 ~ 4:52)
-
-work for classification
-
-1. binary classification
-
-60% Training, 20% validation, and 20% test sets
+![Alt text](image-1.png)
 
 ## lesson 3 -- decision trees and random forests (4:52 ~ 7:22)
 
